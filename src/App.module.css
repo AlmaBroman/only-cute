@@ -4,17 +4,22 @@
     min-height: 100vh;
 }
 
+.Main {
+  padding-top: 81px;
+}
+
 * {
     box-sizing: border-box;
   }
   
   a {
-    color: #555555;
+    color: #646464;
     transition: color ease-in-out 0.3s;
   }
   
   a:hover {
     text-decoration: none;
+    color:#313131;
   }
   
   a:hover i {
