@@ -1,41 +1,48 @@
 .App {
-    font-family: "Nunito", sans-serif;
-    background-color: #FFF;
-    min-height: 100vh;
+  font-family: "Nunito", sans-serif;
+  background-color: #fff;
+  min-height: 100vh;
 }
 
 .Main {
-  padding-top: 81px;
+  padding-top: 90px;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+a {
+  color: #646464;
+  transition: color ease-in-out 0.3s;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #313131;
+}
+
+a:hover i {
+  color: #ff66c4;
+  transition: color ease-in-out 0.3s;
+}
+
+i {
+  color: #cfced3;
+  font-size: 1.3rem;
+  padding: 7px;
+  vertical-align: middle;
+}
+
+i:hover {
+  cursor: pointer;
+  transition: color ease-in-out 0.3s;
+  color: #ff66c4;
+}
+
+@media screen and (min-width: 768px) {
+  .Main {
+    padding-top: 0;
+    padding-left: 170px;
   }
-  
-  a {
-    color: #646464;
-    transition: color ease-in-out 0.3s;
-  }
-  
-  a:hover {
-    text-decoration: none;
-    color:#313131;
-  }
-  
-  a:hover i {
-    color: #FF66C4;
-    transition: color ease-in-out 0.3s;
-  }
-  
-  i {
-    color: #cfced3;
-    font-size: 1.3rem;
-    padding: 7px;
-    vertical-align: middle;
-  }
-  
-  i:hover {
-    cursor: pointer;
-    transition: color ease-in-out 0.3s;
-    color: #FF66C4;
-  }
+}
