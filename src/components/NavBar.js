@@ -9,8 +9,8 @@ const NavBar = () => {
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container className={styles.NavContainer}>
         <NavLink to="/">
-          <Navbar.Brand>
-            <img src={logo} alt="logo" height="45" />
+          <Navbar.Brand className={styles.NavBrand}>
+            <img src={logo} alt="logo" />
           </Navbar.Brand>
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

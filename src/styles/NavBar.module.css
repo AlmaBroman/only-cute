@@ -11,10 +11,15 @@
     color: #FF66C4;
 }
 
+.NavBrand img {
+    height: 60px;
+}
+
 @media screen and (min-width: 768px) {
     .NavBar{
         display: flex;
         flex-direction: column;
+        align-items: center;
         flex-wrap: wrap;
         right: auto;
         height: 100vh;
@@ -24,6 +29,15 @@
     .NavContainer{
         display: flex;
         flex-direction: column;
+    }
+
+    .NavBrand {
+        padding: 0;
+        margin: 0;
+    }
+
+    .NavBrand img {
+        height: auto;
     }
 
 }
