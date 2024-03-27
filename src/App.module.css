@@ -5,12 +5,15 @@
 }
 
 .Main {
-  padding-top: 90px;
+  padding-top: 100px;
 }
 
 .Content {
   background-color: #ffffff;
   padding: 10px;
+}
+
+.Border {
   border-radius: 2px;
   border: 1px solid #dadadf;
 }
@@ -84,7 +87,7 @@ figure {
 
 @media screen and (min-width: 768px) {
   .Main {
-    padding-top: 0;
-    padding-left: 190px;
+    padding-top: 30px;
+    padding-left: 170px;
   }
 }

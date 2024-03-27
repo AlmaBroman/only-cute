@@ -48,16 +48,16 @@ function SignInForm() {
   };
 
   return (
-    <Row className={styles.Row}>
+    <Row className="justify-content-md-center mt-md-5">
       <Col className="my-auto p-0 p-md-2" md={6}>
-        <Container className={`${appStyles.Content} p-4 `}>
+        <Container className={`${appStyles.Content} ${appStyles.Border} p-4 `}>
           <h1 className={styles.Header}>sign in</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
-              <Form.Label className="d-none">Username</Form.Label>
+              <Form.Label className="d-none">username</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Username"
+                placeholder="username"
                 name="username"
                 className={styles.Input}
                 value={username}
@@ -74,7 +74,7 @@ function SignInForm() {
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="password"
                 name="password"
                 className={styles.Input}
                 value={password}
@@ -101,18 +101,9 @@ function SignInForm() {
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signup">
-            Don't have an account? <span>Sign up now!</span>
+            Don't have an account? <br /><span>Sign up now!</span>
           </Link>
         </Container>
-      </Col>
-      <Col
-        md={6}
-        className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
-      >
-        <Image
-          className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg"}
-        />
       </Col>
     </Row>
   );

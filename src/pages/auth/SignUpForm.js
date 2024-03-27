@@ -8,7 +8,6 @@ import appStyles from "../../App.module.css";
 import {
   Form,
   Button,
-  Image,
   Col,
   Row,
   Container,
@@ -46,9 +45,9 @@ const SignUpForm = () => {
   };
 
   return (
-    <Row className={styles.Row}>
+    <Row className="justify-content-md-center mt-md-5">
       <Col className="my-auto py-2 p-md-2" md={6}>
-        <Container className={`${appStyles.Content} p-4 `}>
+        <Container className={`${appStyles.Content} ${appStyles.Border} p-4 `}>
           <h1 className={styles.Header}>sign up</h1>
 
           <Form onSubmit={handleSubmit}>
@@ -57,7 +56,7 @@ const SignUpForm = () => {
               <Form.Control
                 className={styles.Input}
                 type="text"
-                placeholder="Username"
+                placeholder="username"
                 name="username"
                 value={username}
                 onChange={handleChange}
@@ -74,7 +73,7 @@ const SignUpForm = () => {
               <Form.Control
                 className={styles.Input}
                 type="password"
-                placeholder="Password"
+                placeholder="password"
                 name="password1"
                 value={password1}
                 onChange={handleChange}
@@ -91,7 +90,7 @@ const SignUpForm = () => {
               <Form.Control
                 className={styles.Input}
                 type="password"
-                placeholder="Confirm password"
+                placeholder="confirm password"
                 name="password2"
                 value={password2}
                 onChange={handleChange}
@@ -119,18 +118,9 @@ const SignUpForm = () => {
 
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signin">
-            Already have an account? <span>Sign in</span>
+            Already have an account? <br /><span>Sign in</span>
           </Link>
         </Container>
-      </Col>
-      <Col
-        md={6}
-        className={`my-auto d-none d-md-block p-2 ${styles.SignUpCol}`}
-      >
-        <Image
-          className={`${appStyles.FillerImage}`}
-          src={"https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero2.jpg"}
-        />
       </Col>
     </Row>
   );

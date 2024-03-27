@@ -22,18 +22,18 @@ function App() {
                 exact
                 path="/signin"
                 render={() => (
-                  <h1>
+                  <div>
                     <SignInForm />
-                  </h1>
+                  </div>
                 )}
               />
               <Route
                 exact
                 path="/register"
                 render={() => (
-                  <h1>
+                  <div>
                     <SignUpForm />
-                  </h1>
+                  </div>
                 )}
               />
               <Route render={() => <h1>Page not found! :o</h1>} />
