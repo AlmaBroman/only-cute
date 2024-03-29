@@ -46,16 +46,16 @@ function App() {
               />
             )}
           />
-          {/* <Route
+          <Route
             exact
-            path="/saved"
+            path="/saved_posts"
             render={() => (
               <PostsPage
                 message="No results found. Adjust the search keyword or like a post."
                 filter={`saved_posts__owner__profile=${profile_id}&ordering=-saved_posts__created_at&`}
               />
             )}
-          /> */}
+          />
           <Route exact path="/search" render={() => <h1>Search</h1>} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/register" render={() => <SignUpForm />} />

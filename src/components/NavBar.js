@@ -28,7 +28,7 @@ const NavBar = () => {
 
   const addPostIcon = (
     <>
-      <NavLink className={styles.NavLink} to="/saved" onClick={() => {}}>
+      <NavLink className={styles.NavLink} to="/saved_posts" onClick={() => {}}>
         <i className="fas fa-solid fa-star"></i>Saved
       </NavLink>
       <NavLink

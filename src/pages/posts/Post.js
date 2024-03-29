@@ -21,7 +21,7 @@ const Post = (props) => {
     updated_at,
     postPage,
     setPosts,
-    // saved_post_id,
+    saved_post_id,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -58,6 +58,38 @@ const Post = (props) => {
     }
   };
 
+  const handleSave = async () => {
+    try {
+      const { data } = await axiosRes.post("/saved_posts/", { post: id });
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, saved_post_id: data.id }
+            : post;
+        }),
+      }));
+    } catch (err) {
+        console.log(err)
+    }
+  };
+
+  const handleUnsave = async () => {
+    try {
+        await axiosRes.delete(`/saved_posts/${saved_post_id}/`);
+        setPosts((prevPosts) => ({
+            ...prevPosts,
+            results: prevPosts.results.map((post) => {
+            return post.id === id
+                ? { ...post, saved_post_id: null}
+                : post;
+            }),
+        }));
+    } catch (err) {
+        console.log(err)
+    }
+  };
+
   return (
     <Card className={styles.Post}>
       <Card.Body>
@@ -79,6 +111,7 @@ const Post = (props) => {
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
         <div className={styles.PostBar}>
+          {/* Like post */}
           {is_owner ? (
             <OverlayTrigger
               placement="top"
@@ -103,10 +136,35 @@ const Post = (props) => {
             </OverlayTrigger>
           )}
           {likes_count}
+          {/* Comments */}
           <Link to={`/posts/${id}`}>
             <i className="far fa-comments" />
           </Link>
           {comments_count}
+          {/* Save Post */}
+          {is_owner ? (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>You can't save your own post!</Tooltip>}
+            >
+              <i className="far fa-save" />
+            </OverlayTrigger>
+          ) : saved_post_id ? (
+            <span onClick={handleUnsave}>
+              <i className={`fas fa-save ${styles.Heart}`} />
+            </span>
+          ) : currentUser ? (
+            <span onClick={handleSave}>
+              <i className={`far fa-save ${styles.HeartOutline}`} />
+            </span>
+          ) : (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>Log in to save posts!</Tooltip>}
+            >
+              <i className="far fa-save" />
+            </OverlayTrigger>
+          )}
           {/* <i className="far fa-save" /> */}
         </div>
       </Card.Body>
