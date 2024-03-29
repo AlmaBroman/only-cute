@@ -30,15 +30,15 @@ const Post = (props) => {
   const history = useHistory();
 
   const handleEdit = () => {
-    history.push(`posts/${id}/edit`)
-  }
+    history.push(`/posts/${id}/edit`);
+  };
 
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`posts/${id}/`);
       history.goBack();
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -54,23 +54,23 @@ const Post = (props) => {
         }),
       }));
     } catch (err) {
-        console.log(err)
+      console.log(err);
     }
   };
 
   const handleUnlike = async () => {
     try {
-        await axiosRes.delete(`/likes/${like_id}/`);
-        setPosts((prevPosts) => ({
-            ...prevPosts,
-            results: prevPosts.results.map((post) => {
-            return post.id === id
-                ? { ...post, likes_count: post.likes_count - 1, like_id: null}
-                : post;
-            }),
-        }));
+      await axiosRes.delete(`/likes/${like_id}/`);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id
+            ? { ...post, likes_count: post.likes_count - 1, like_id: null }
+            : post;
+        }),
+      }));
     } catch (err) {
-        console.log(err)
+      console.log(err);
     }
   };
 
@@ -80,29 +80,25 @@ const Post = (props) => {
       setPosts((prevPosts) => ({
         ...prevPosts,
         results: prevPosts.results.map((post) => {
-          return post.id === id
-            ? { ...post, saved_post_id: data.id }
-            : post;
+          return post.id === id ? { ...post, saved_post_id: data.id } : post;
         }),
       }));
     } catch (err) {
-        console.log(err)
+      console.log(err);
     }
   };
 
   const handleUnsave = async () => {
     try {
-        await axiosRes.delete(`/saved_posts/${saved_post_id}/`);
-        setPosts((prevPosts) => ({
-            ...prevPosts,
-            results: prevPosts.results.map((post) => {
-            return post.id === id
-                ? { ...post, saved_post_id: null}
-                : post;
-            }),
-        }));
+      await axiosRes.delete(`/saved_posts/${saved_post_id}/`);
+      setPosts((prevPosts) => ({
+        ...prevPosts,
+        results: prevPosts.results.map((post) => {
+          return post.id === id ? { ...post, saved_post_id: null } : post;
+        }),
+      }));
     } catch (err) {
-        console.log(err)
+      console.log(err);
     }
   };
 
@@ -116,7 +112,12 @@ const Post = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_at}</span>
-            {is_owner && postPage && <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />}
+            {is_owner && postPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>
