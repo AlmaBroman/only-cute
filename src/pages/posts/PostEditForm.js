@@ -1,21 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-
-import Upload from "../../assets/upload-logo.png";
+import Alert from "react-bootstrap/Alert";
+import Image from "react-bootstrap/Image";
 
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
-import { Image } from "react-bootstrap";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
+import { useHistory, useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Alert } from "bootstrap";
 
 function PostEditForm() {
   const [errors, setErrors] = useState({});
@@ -29,6 +27,22 @@ function PostEditForm() {
 
   const imageInput = useRef(null);
   const history = useHistory();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosReq.get(`/posts/${id}/`);
+        const { title, content, image, is_owner } = data;
+
+        is_owner ? setPostData({ title, content, image }) : history.push("/");
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    handleMount();
+  }, [history, id]);
 
   const handleChange = (event) => {
     setPostData({
@@ -53,18 +67,21 @@ function PostEditForm() {
 
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("image", imageInput.current.files[0]);
 
-    try {
-      const { data } = await axiosReq.post("/posts/", formData);
-      history.push(`/posts/${data.id}`);
-    } catch (err) {
-      console.log(err);
-      if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
+    if (imageInput?.current?.files[0]) {
+        formData.append("image", imageInput.current.files[0]);
       }
-    }
-  };
+  
+      try {
+        await axiosReq.put(`/posts/${id}/`, formData);
+        history.push(`/posts/${id}`);
+      } catch (err) {
+        console.log(err);
+        if (err.response?.status !== 401) {
+          setErrors(err.response?.data);
+        }
+      }
+    };
 
   const textFields = (
     <div className="text-center">
@@ -77,11 +94,12 @@ function PostEditForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      {errors.title?.map((message, idx) => (
+      {errors?.title?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
+
       <Form.Group>
         <Form.Label>Content</Form.Label>
         <Form.Control
@@ -92,23 +110,20 @@ function PostEditForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      {errors.content?.map((message, idx) => (
+      {errors?.content?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
 
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Yellow}`}
+        className={`${btnStyles.Button} ${btnStyles.Blue}`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button
-        className={`${btnStyles.Button} ${btnStyles.Yellow}`}
-        type="submit"
-      >
-        create
+      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+        save
       </Button>
     </div>
   );
@@ -121,31 +136,17 @@ function PostEditForm() {
             className={`${appStyles.Content} ${styles.Container} ${appStyles.Border} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-              {image ? (
-                <>
-                  <figure>
-                    <Image className={appStyles.Image} src={image} rounded />
-                  </figure>
-                  <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Yellow} btn`}
-                      htmlFor="image-upload"
-                    >
-                      Change the image
-                    </Form.Label>
-                  </div>
-                </>
-              ) : (
+            <figure>
+                <Image className={appStyles.Image} src={image} rounded />
+              </figure>
+              <div>
                 <Form.Label
-                  className="d-flex justify-content-center"
+                  className={`${btnStyles.Button} ${btnStyles.Yellow} btn`}
                   htmlFor="image-upload"
                 >
-                  <Asset
-                    src={Upload}
-                    message="Click or tap to upload an image"
-                  />
+                  Change the image
                 </Form.Label>
-              )}
+              </div>
 
               <Form.File
                 id="image-upload"
@@ -159,6 +160,7 @@ function PostEditForm() {
                 {message}
               </Alert>
             ))}
+
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
