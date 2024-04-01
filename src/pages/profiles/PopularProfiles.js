@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import appStyles from "../../App.module.css";
-import { Container } from 'react-bootstrap';
+import { Col, Container } from 'react-bootstrap';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import Asset from '../../components/Asset';
+import Profile from '../posts/Profile';
 
 const PopularProfiles = () => {
     const [profileData, setProfileData] = useState({
@@ -32,13 +33,15 @@ const PopularProfiles = () => {
     }, [currentUser]);
 
   return (
-    <Container className={appStyles.Content}>
+    <Container className={`${appStyles.Content} ${appStyles.Border} text-center`}>
         {popularProfiles.results.length ? (
             <>
-            <p>Here are some suggestions:</p>
+            <h3>Here are some suggestions:</h3>
+            <div>
             {popularProfiles.results.map(profile => (
-                <p key={profile.id}>{profile.owner}</p>
+                <Profile key={profile.id} profile={profile} />
             ))}
+            </div>
             </>
         ) : (
             <Asset spinner />
