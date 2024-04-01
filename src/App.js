@@ -10,6 +10,7 @@ import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PostEditForm from "./pages/posts/PostEditForm";
+import PopularProfiles from "./pages/profiles/PopularProfiles";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -23,12 +24,16 @@ function App() {
           <Route
             exact
             path="/"
-            render={() => (
-              <PostsPage
+            render={() => {
+              // Render Popular Profiles if posts are empty
+              return (
+                <PostsPage
                 message="No results found. Adjust the search  or follow a user."
                 filter={`owner__followed__owner__profile=${profile_id}&`}
+                renderFallback={<PopularProfiles />}
               />
-            )}
+              );
+            }}
           />
           <Route
             exact
