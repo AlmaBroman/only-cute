@@ -12,6 +12,10 @@ import { useCurrentUser } from "./contexts/CurrentUserContext";
 import PostEditForm from "./pages/posts/PostEditForm";
 import PopularProfiles from "./pages/profiles/PopularProfiles";
 import ProfilePage from "./pages/profiles/ProfilePage";
+import UsernameForm from "./pages/profiles/UsernameForm";
+import UserPasswordForm from "./pages/profiles/UserPasswordForm";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+
 
 function App() {
   const currentUser = useCurrentUser();
@@ -29,10 +33,10 @@ function App() {
               // Render Popular Profiles if posts are empty
               return (
                 <PostsPage
-                message="No results found. Adjust the search  or follow a user."
-                filter={`owner__followed__owner__profile=${profile_id}&`}
-                renderFallback={<PopularProfiles />}
-              />
+                  message="No results found. Adjust the search  or follow a user."
+                  filter={`owner__followed__owner__profile=${profile_id}&`}
+                  renderFallback={<PopularProfiles />}
+                />
               );
             }}
           />
@@ -70,6 +74,21 @@ function App() {
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route exact path="/posts/:id/edit" render={() => <PostEditForm />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+          <Route
+            exact
+            path="/profiles/:id/edit/username"
+            render={() => <UsernameForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/password"
+            render={() => <UserPasswordForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <ProfileEditForm />}
+          />
           <Route render={() => <h1>Page not found! :o</h1>} />
         </Switch>
       </Container>
