@@ -33,7 +33,8 @@ function App() {
               // Render Popular Profiles if posts are empty
               return (
                 <PostsPage
-                  message="No results found. Adjust the search  or follow a user."
+                  message="Nothing to see here..."
+                  message2="Follow someone to view their posts here!"
                   filter={`owner__followed__owner__profile=${profile_id}&`}
                   renderFallback={<PopularProfiles />}
                 />
@@ -62,12 +63,18 @@ function App() {
             path="/saved_posts"
             render={() => (
               <PostsPage
-                message="No results found. Adjust the search keyword or like a post."
+                message="No results found." message2="Adjust the search keyword or like a post." 
                 filter={`saved_posts__owner__profile=${profile_id}&ordering=-saved_posts__created_at&`}
               />
             )}
           />
-          <Route exact path="/search" render={() => <h1>Search</h1>} />
+          <Route
+            exact
+            path="/search"
+            render={() => (
+              <PostsPage message="No results found" message2="Try searching for something else!" />
+            )}
+          />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/register" render={() => <SignUpForm />} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />

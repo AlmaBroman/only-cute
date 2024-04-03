@@ -15,13 +15,15 @@ import { axiosReq } from "../../api/axiosDefaults";
 import NoResults from "../../assets/wow.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-function PostsPage({ message, filter = "", renderFallback }) {
+function PostsPage({ message, message2, filter = "", renderFallback }) {
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
 
   const [query, setQuery] = useState("");
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -43,50 +45,85 @@ function PostsPage({ message, filter = "", renderFallback }) {
     };
   }, [filter, query, pathname]);
 
+  let pageTitle = "";
+  let pageDescription = "";
+
+  if (pathname === "/") {
+    pageTitle = "Home";
+    pageDescription = currentUser
+      ? "Welcome to your home feed, scroll down to view what the people you're following have been up to!"
+      : "Create an account or sign in to view your home feed";
+  } else if (pathname === "/explore") {
+    pageTitle = "Explore";
+    pageDescription = "Discover new content and profiles!";
+  } else if (pathname === "/search") {
+    pageTitle= "Search";
+    pageDescription= "Search for a username or a post title!"
+  }
+
   return (
-    <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <i className={`fas fa-magnifying-glass ${styles.SearchIcon}`} />
-        <Form
-          className={styles.SearchBar}
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <Form.Control
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            type="text"
-            className="mr-sm-2"
-            placeholder="Search Posts"
-          />
-        </Form>
-        {hasLoaded ? (
-          <>
-            {posts.results.length ? (
-              <InfiniteScroll
-                children={posts.results.map((post) => (
-                  <Post key={post.id} {...post} setPosts={setPosts} />
-                ))}
-                dataLength={posts.results.length}
-                loader={<Asset spinner />}
-                hasMore={!!posts.next}
-                next={() => fetchMoreData(posts, setPosts)}
-              />
-            ) : (
-              <>
+    <Container className={appStyles.Content}>
+      {pathname === "/" && !currentUser ? (
+        <>
+          <h1>{pageTitle}</h1>
+          <p>{pageDescription}</p>
+        </>
+      ) : (
+        <>
+          <h1>{pageTitle}</h1>
+          <p>{pageDescription}</p>
+          {pathname === "/search" && (
+            <Row>
+              <Col className="py-2 p-0 p-lg-2" lg={8}>
+                <i className={`fas fa-magnifying-glass ${styles.SearchIcon}`} />
+                <Form
+                  className={styles.SearchBar}
+                  onSubmit={(event) => event.preventDefault()}
+                >
+                  <Form.Control
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    type="text"
+                    className="mr-sm-2"
+                    placeholder="Search Posts"
+                  />
+                </Form>
+              </Col>
+            </Row>
+          )}
+          <Row className="h-100">
+            <Col className="py-2 p-0 p-lg-2" lg={8}>
+              {hasLoaded ? (
+                <>
+                  {posts.results.length ? (
+                    <InfiniteScroll
+                      children={posts.results.map((post) => (
+                        <Post key={post.id} {...post} setPosts={setPosts} />
+                      ))}
+                      dataLength={posts.results.length}
+                      loader={<Asset spinner />}
+                      hasMore={!!posts.next}
+                      next={() => fetchMoreData(posts, setPosts)}
+                    />
+                  ) : (
+                    <>
+                      <Container className={appStyles.Content}>
+                        <Asset src={NoResults} message={message} message2={message2}/>
+                        {renderFallback}
+                      </Container>
+                    </>
+                  )}
+                </>
+              ) : (
                 <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message={message} />
-                  {renderFallback}
+                  <Asset spinner />
                 </Container>
-              </>
-            )}
-          </>
-        ) : (
-          <Container className={appStyles.Content}>
-            <Asset spinner />
-          </Container>
-        )}
-      </Col>
-    </Row>
+              )}
+            </Col>
+          </Row>
+        </>
+      )}
+    </Container>
   );
 }
 
