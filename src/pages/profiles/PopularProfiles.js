@@ -1,29 +1,35 @@
-import React from 'react'
+import React from "react";
 import appStyles from "../../App.module.css";
-import { Container } from 'react-bootstrap';
-import Asset from '../../components/Asset';
-import Profile from '../posts/Profile';
-import { useProfileData } from '../../contexts/ProfileDataContext';
+import { Row, Col, Container } from "react-bootstrap";
+import Asset from "../../components/Asset";
+import Profile from "../posts/Profile";
+import { useProfileData } from "../../contexts/ProfileDataContext";
 
 const PopularProfiles = () => {
-    const { popularProfiles } = useProfileData();
+  const { popularProfiles } = useProfileData();
 
   return (
-    <Container className={`${appStyles.Content} ${appStyles.Border} text-center`}>
-        {popularProfiles.results.length ? (
+    <Container
+      className={`${appStyles.Content} ${appStyles.Border} text-center`}
+    >
+      <Row>
+        <Col>
+          {popularProfiles.results.length ? (
             <>
-            <h3>Here are some suggestions:</h3>
-            <div>
-            {popularProfiles.results.map(profile => (
-                <Profile key={profile.id} profile={profile} />
-            ))}
-            </div>
+              <h3>Here are some suggestions:</h3>
+              <div>
+                {popularProfiles.results.map((profile) => (
+                  <Profile key={profile.id} profile={profile} />
+                ))}
+              </div>
             </>
-        ) : (
+          ) : (
             <Asset spinner />
-        )}
+          )}
+        </Col>
+      </Row>
     </Container>
-  )
-}
+  );
+};
 
-export default PopularProfiles
+export default PopularProfiles;

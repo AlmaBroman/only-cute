@@ -51,7 +51,7 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
   if (pathname === "/") {
     pageTitle = "Home";
     pageDescription = currentUser
-      ? "Welcome to your home feed, scroll down to view what the people you're following have been up to!"
+      ? "Welcome to your home feed! This is your place to view what the people you're following have been up to!"
       : "Create an account or sign in to view your home feed";
   } else if (pathname === "/explore") {
     pageTitle = "Explore";
@@ -65,13 +65,21 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
     <Container className={appStyles.Content}>
       {pathname === "/" && !currentUser ? (
         <>
+        <Row className="justify-content-center text-center">
+        <Col>
           <h1>{pageTitle}</h1>
           <p>{pageDescription}</p>
+          </Col>
+          </Row>
         </>
       ) : (
         <>
+          <Row className="justify-content-center text-center">
+            <Col lg={8}>
           <h1>{pageTitle}</h1>
           <p>{pageDescription}</p>
+          </Col>
+          </Row>
           {pathname === "/search" && (
             <Row>
               <Col className="py-2 p-0 p-lg-2" lg={8}>
@@ -91,7 +99,7 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
               </Col>
             </Row>
           )}
-          <Row className="h-100">
+          <Row className="h-100 justify-content-center">
             <Col className="py-2 p-0 p-lg-2" lg={8}>
               {hasLoaded ? (
                 <>
