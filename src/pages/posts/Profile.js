@@ -8,7 +8,7 @@ import { Button } from "react-bootstrap";
 import { useSetProfileData } from "../../contexts/ProfileDataContext";
 
 const Profile = (props) => {
-  const { profile, mobile, imageSize = 55 } = props;
+  const { profile, imageSize = 55 } = props;
   const { id, following_id, image, owner } = profile;
 
   const currentUser = useCurrentUser();
