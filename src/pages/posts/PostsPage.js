@@ -81,7 +81,7 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
           </Col>
           </Row>
           {pathname === "/search" && (
-            <Row>
+            <Row className="justify-content-center">
               <Col className="py-2 p-0 p-lg-2" lg={8}>
                 <i className={`fas fa-magnifying-glass ${styles.SearchIcon}`} />
                 <Form

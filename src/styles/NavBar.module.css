@@ -3,7 +3,7 @@
     border: solid #ffcdec 1px;
 }
 
-.NavLink {
+.NavLinksContainer {
     padding: 5px;
 }
 
@@ -30,6 +30,7 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        padding: 15px 0 0 0;
     }
 
     .NavBrand {
@@ -46,6 +47,7 @@
         display: flex;
         flex-wrap: wrap;
         align-content: space-between;
+        line-height: 3rem;
       }
 
 }

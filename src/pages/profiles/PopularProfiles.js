@@ -12,8 +12,8 @@ const PopularProfiles = () => {
     <Container
       className={`${appStyles.Content} ${appStyles.Border} text-center`}
     >
-      <Row>
-        <Col>
+      <Row className={appStyles.Padding20}>
+        <Col className={appStyles.Column}>
           {popularProfiles.results.length ? (
             <>
               <h3>Here are some suggestions:</h3>

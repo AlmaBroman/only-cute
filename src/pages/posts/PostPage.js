@@ -41,7 +41,7 @@ function PostPage() {
   }, [id]);
 
   return (
-    <Row className="h-100">
+    <Row className="h-100 justify-content-center">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <Post {...post.results[0]} setPosts={setPost} postPage />
         <Container className={`${appStyles.Content} ${appStyles.Border}`}>

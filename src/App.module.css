@@ -18,6 +18,12 @@
   border: 1px solid #dadadf;
 }
 
+.Column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .FillerImage {
   object-fit: cover;
   height: 100%;
@@ -69,6 +75,10 @@ i:hover {
 figure {
   text-align: center;
   display: inline-block;
+}
+
+.Padding20 {
+  padding: 20px;
 }
 
 /* scrollbar */
