@@ -19,7 +19,7 @@ import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
-  useRedirect('loggedIn');
+  useRedirect("loggedIn");
 
   const [signInData, setSignInData] = useState({
     username: "",
@@ -104,7 +104,8 @@ function SignInForm() {
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signup">
-            Don't have an account? <br /><span>Sign up now!</span>
+            Don't have an account? <br />
+            <span>Sign up now!</span>
           </Link>
         </Container>
       </Col>

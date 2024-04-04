@@ -21,7 +21,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 
 function PostCreateForm() {
-  useRedirect('loggedOut');
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
 
   const [postData, setPostData] = useState({
@@ -109,7 +109,10 @@ function PostCreateForm() {
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Yellow}`} type="submit">
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Yellow}`}
+        type="submit"
+      >
         create
       </Button>
     </div>

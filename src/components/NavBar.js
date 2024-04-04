@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
@@ -11,6 +10,10 @@ import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
+
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -49,7 +52,11 @@ const NavBar = () => {
         to={`/profiles/${currentUser?.profile_id}`}
         onClick={() => {}}
       >
-        <Avatar src={currentUser?.profile_image} text={currentUser?.username} height={30} />
+        <Avatar
+          src={currentUser?.profile_image}
+          text={currentUser?.username}
+          height={30}
+        />
       </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
         <i className="fas fa-right-from-bracket"></i>Sign Out

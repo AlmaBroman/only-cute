@@ -1,6 +1,10 @@
 import React from "react";
 import appStyles from "../../App.module.css";
-import { Row, Col, Container } from "react-bootstrap";
+
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+
 import Asset from "../../components/Asset";
 import Profile from "../posts/Profile";
 import { useProfileData } from "../../contexts/ProfileDataContext";

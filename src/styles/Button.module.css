@@ -23,7 +23,7 @@
 
 .Button:focus {
   background-color: #359d1b;
-  box-shadow: 0 5px #2b8714; 
+  box-shadow: 0 5px #2b8714;
 }
 
 .Wide {
@@ -59,7 +59,7 @@
   background-color: #f9d238 !important;
 }
 
-.Yellow:not(:disabled):not(.disabled):active:focus{
+.Yellow:not(:disabled):not(.disabled):active:focus {
   color: #646464;
 }
 
@@ -78,5 +78,5 @@
 .Green {
   background-color: #359d1b;
   box-shadow: 0 5px #277c11;
-  color: #FFF;
+  color: #fff;
 }

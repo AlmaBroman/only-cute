@@ -17,7 +17,6 @@ import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import NotFound from "./components/NotFound";
 
-
 function App() {
   const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";
@@ -64,7 +63,8 @@ function App() {
             path="/saved_posts"
             render={() => (
               <PostsPage
-                message="No results found." message2="Adjust the search keyword or like a post." 
+                message="No results found."
+                message2="Adjust the search keyword or like a post."
                 filter={`saved_posts__owner__profile=${profile_id}&ordering=-saved_posts__created_at&`}
               />
             )}
@@ -73,7 +73,10 @@ function App() {
             exact
             path="/search"
             render={() => (
-              <PostsPage message="No results found" message2="Try searching for something else!" />
+              <PostsPage
+                message="No results found"
+                message2="Try searching for something else!"
+              />
             )}
           />
           <Route exact path="/signin" render={() => <SignInForm />} />

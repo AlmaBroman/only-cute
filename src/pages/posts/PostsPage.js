@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+
 import Post from "./Post";
 import Asset from "../../components/Asset";
 
@@ -57,28 +58,28 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
     pageTitle = "Explore";
     pageDescription = "Discover new content and profiles!";
   } else if (pathname === "/search") {
-    pageTitle= "Search";
-    pageDescription= "Search for a username or a post title!"
+    pageTitle = "Search";
+    pageDescription = "Search for a username or a post title!";
   }
 
   return (
     <Container className={appStyles.Content}>
       {pathname === "/" && !currentUser ? (
         <>
-        <Row className="justify-content-center text-center">
-        <Col>
-          <h1>{pageTitle}</h1>
-          <p>{pageDescription}</p>
-          </Col>
+          <Row className="justify-content-center text-center">
+            <Col>
+              <h1>{pageTitle}</h1>
+              <p>{pageDescription}</p>
+            </Col>
           </Row>
         </>
       ) : (
         <>
           <Row className="justify-content-center text-center">
             <Col lg={8}>
-          <h1>{pageTitle}</h1>
-          <p>{pageDescription}</p>
-          </Col>
+              <h1>{pageTitle}</h1>
+              <p>{pageDescription}</p>
+            </Col>
           </Row>
           {pathname === "/search" && (
             <Row className="justify-content-center">
@@ -116,7 +117,11 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
                   ) : (
                     <>
                       <Container className={appStyles.Content}>
-                        <Asset src={NoResults} message={message} message2={message2}/>
+                        <Asset
+                          src={NoResults}
+                          message={message}
+                          message2={message2}
+                        />
                         {renderFallback}
                       </Container>
                     </>

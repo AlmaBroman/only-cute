@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 
 import Asset from "../../components/Asset";
 
@@ -17,7 +19,6 @@ import {
   useProfileData,
   useSetProfileData,
 } from "../../contexts/ProfileDataContext";
-import { Button, Image } from "react-bootstrap";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
 import { fetchMoreData } from "../../utils/utils";
@@ -60,7 +61,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-    {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image

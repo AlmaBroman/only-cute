@@ -1,53 +1,52 @@
 .NavBar {
-    background-color: #FFF8FC;
-    border: solid #ffcdec 1px;
+  background-color: #fff8fc;
+  border: solid #ffcdec 1px;
 }
 
 .NavLinksContainer {
-    padding: 5px;
+  padding: 5px;
 }
 
 .Active i {
-    color: #FF66C4;
+  color: #ff66c4;
 }
 
 .NavBrand img {
-    height: 60px;
+  height: 60px;
 }
 
 @media screen and (min-width: 768px) {
-    .NavBar{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-wrap: wrap;
-        right: auto;
-        height: 100vh;
-        width: 180px;
-    }
+  .NavBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    right: auto;
+    height: 100vh;
+    width: 180px;
+  }
 
-    .NavContainer{
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 15px 0 0 0;
-    }
+  .NavContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0 0 0;
+  }
 
-    .NavBrand {
-        padding: 0;
-        margin: 0;
-    }
+  .NavBrand {
+    padding: 0;
+    margin: 0;
+  }
 
-    .NavBrand img {
-        height: auto;
-    }
+  .NavBrand img {
+    height: auto;
+  }
 
-    .NavLinksContainer {
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: space-between;
-        line-height: 3rem;
-      }
-
+  .NavLinksContainer {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    line-height: 3rem;
+  }
 }

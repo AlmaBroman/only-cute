@@ -69,19 +69,19 @@ function PostEditForm() {
     formData.append("content", content);
 
     if (imageInput?.current?.files[0]) {
-        formData.append("image", imageInput.current.files[0]);
+      formData.append("image", imageInput.current.files[0]);
+    }
+
+    try {
+      await axiosReq.put(`/posts/${id}/`, formData);
+      history.push(`/posts/${id}`);
+    } catch (err) {
+      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
       }
-  
-      try {
-        await axiosReq.put(`/posts/${id}/`, formData);
-        history.push(`/posts/${id}`);
-      } catch (err) {
-        console.log(err);
-        if (err.response?.status !== 401) {
-          setErrors(err.response?.data);
-        }
-      }
-    };
+    }
+  };
 
   const textFields = (
     <div className="text-center">
@@ -122,7 +122,10 @@ function PostEditForm() {
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Green}`} type="submit">
+      <Button
+        className={`${btnStyles.Button} ${btnStyles.Green}`}
+        type="submit"
+      >
         save
       </Button>
     </div>
@@ -136,7 +139,7 @@ function PostEditForm() {
             className={`${appStyles.Content} ${styles.Container} ${appStyles.Border} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-            <figure>
+              <figure>
                 <Image className={appStyles.Image} src={image} rounded />
               </figure>
               <div>
