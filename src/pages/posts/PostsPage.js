@@ -42,7 +42,7 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, pathname]);
+  }, [filter, query, pathname, currentUser]);
 
   let pageTitle = "";
   let pageDescription = "";
