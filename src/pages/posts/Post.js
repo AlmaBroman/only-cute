@@ -145,11 +145,11 @@ const Post = (props) => {
       </OverlayTrigger>
     ) : saved_post_id ? (
       <span onClick={handleUnsave}>
-        <i className={`fas fa-star ${styles.Heart}`} />
+        <i className={`fas fa-star ${styles.Star}`} />
       </span>
     ) : currentUser ? (
       <span onClick={handleSave}>
-        <i className={`far fa-star ${styles.HeartOutline}`} />
+        <i className={`far fa-star ${styles.StarOutline}`} />
       </span>
     ) : (
       <OverlayTrigger

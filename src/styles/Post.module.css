@@ -23,6 +23,18 @@ h5 {
   color: #ff66c4;
 }
 
+.Star {
+  color: #ffde59;
+}
+
+.Star:hover {
+  color: #f8cc1c;
+}
+
+.StarOutline:hover {
+  color: #f8cc1c;
+}
+
 .SquareImage {
   height: 290px;
   width: 100%;
