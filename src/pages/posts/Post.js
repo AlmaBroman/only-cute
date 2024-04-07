@@ -1,5 +1,7 @@
+// Inside Post.js
+
 import React from "react";
-import styles from "../../styles/Post.module.css";
+import styles from "../../styles/Post.module.css"; // Import the CSS file
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import Card from "react-bootstrap/Card";
@@ -28,6 +30,7 @@ const Post = (props) => {
     postPage,
     setPosts,
     saved_post_id,
+    twoColumns,
   } = props;
 
   const currentUser = useCurrentUser();
@@ -117,69 +120,81 @@ const Post = (props) => {
         </Media>
       </Card.Body>
       <Link to={`/posts/${id}`}>
-        <Card.Img src={image} alt={title} />
+        {twoColumns ? (
+          <Card.Img src={image} alt={title} className={styles.SquareImage} />
+        ) : (
+          <Card.Img src={image} alt={title} />
+        )}
       </Link>
       <Card.Body>
-        {title && <Card.Title className="text-center">{title}</Card.Title>}
-        {content && <Card.Text>{content}</Card.Text>}
-        <div className={styles.PostBar}>
-          {/* Like post */}
-          {is_owner ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You can't like your own post!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          ) : like_id ? (
-            <span onClick={handleUnlike}>
-              <i className={`fas fa-heart ${styles.Heart}`} />
-            </span>
-          ) : currentUser ? (
-            <span onClick={handleLike}>
-              <i className={`far fa-heart ${styles.HeartOutline}`} />
-            </span>
-          ) : (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>Log in to like posts!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          )}
-          {likes_count}
-          {/* Comments */}
-          <Link to={`/posts/${id}`}>
-            <i className="far fa-comments" />
-          </Link>
-          {comments_count}
-          {/* Save Post */}
-          {is_owner ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You can't save your own post!</Tooltip>}
-            >
-              <i className="far fa-save" />
-            </OverlayTrigger>
-          ) : saved_post_id ? (
-            <span onClick={handleUnsave}>
-              <i className={`fas fa-save ${styles.Heart}`} />
-            </span>
-          ) : currentUser ? (
-            <span onClick={handleSave}>
-              <i className={`far fa-save ${styles.HeartOutline}`} />
-            </span>
-          ) : (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>Log in to save posts!</Tooltip>}
-            >
-              <i className="far fa-save" />
-            </OverlayTrigger>
-          )}
-          {/* <i className="far fa-save" /> */}
-        </div>
-      </Card.Body>
+  {title && <Card.Title className="text-center">{title}</Card.Title>}
+  {twoColumns ? (
+    content && <Card.Text className={styles.SameHeight}>{content}</Card.Text>
+  ) : (
+    content && <Card.Text>{content}</Card.Text>
+  )}
+  <div className="d-flex justify-content-between">
+    <div>
+    {/* Save Post */}
+    {is_owner ? (
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip>You can't save your own post!</Tooltip>}
+      >
+        <i className="far fa-star" />
+      </OverlayTrigger>
+    ) : saved_post_id ? (
+      <span onClick={handleUnsave}>
+        <i className={`fas fa-star ${styles.Heart}`} />
+      </span>
+    ) : currentUser ? (
+      <span onClick={handleSave}>
+        <i className={`far fa-star ${styles.HeartOutline}`} />
+      </span>
+    ) : (
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip>Log in to save posts!</Tooltip>}
+      >
+        <i className="far fa-star" />
+      </OverlayTrigger>
+    )}
+    </div>
+    <div>
+    {/* Like post */}
+    {is_owner ? (
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip>You can't like your own post!</Tooltip>}
+      >
+        <i className="far fa-heart" />
+      </OverlayTrigger>
+    ) : like_id ? (
+      <span onClick={handleUnlike}>
+        <i className={`fas fa-heart ${styles.Heart}`} />
+      </span>
+    ) : currentUser ? (
+      <span onClick={handleLike}>
+        <i className={`far fa-heart ${styles.HeartOutline}`} />
+      </span>
+    ) : (
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip>Log in to like posts!</Tooltip>}
+      >
+        <i className="far fa-heart" />
+      </OverlayTrigger>
+    )}
+    {likes_count}
+    {/* Comments */}
+    <Link to={`/posts/${id}`}>
+      <i className="far fa-comments" />
+    </Link>
+    {comments_count}
+    </div>
+  </div>
+</Card.Body>
+
     </Card>
   );
 };

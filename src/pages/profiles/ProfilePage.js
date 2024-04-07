@@ -22,7 +22,6 @@ import {
 import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "../posts/Post";
 import { fetchMoreData } from "../../utils/utils";
-import NoResults from "../../assets/wow.png";
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 function ProfilePage() {
@@ -113,25 +112,30 @@ function ProfilePage() {
     <>
       <hr />
       <p className="text-center">{profile?.owner}'s posts</p>
-      <hr />
-      {profilePosts.results.length ? (
-        <InfiniteScroll
-          children={profilePosts.results.map((post) => (
-            <Post key={post.id} {...post} setPosts={setProfilePosts} />
+      <InfiniteScroll
+        className={styles.hideBottomBar}
+        dataLength={profilePosts.results.length}
+        next={() => fetchMoreData(profilePosts, setProfilePosts)} // fetchMoreData should be a function that fetches more posts
+        hasMore={!!profilePosts.next} // Assuming `next` is a property that indicates if there are more posts to fetch
+        loader={<Asset spinner />}
+        endMessage={
+          <p className="text-center mt-2">
+            <b>You've looked at all the posts!</b>
+          </p>
+        }
+      >
+        <div className="row">
+          {profilePosts.results.map((post) => (
+            <div key={post.id} className="col-md-6">
+              <Post {...post} setPosts={setProfilePosts} twoColumns={true} />
+            </div>
           ))}
-          dataLength={profilePosts.results.length}
-          loader={<Asset spinner />}
-          hasMore={!!profilePosts.next}
-          next={() => fetchMoreData(profilePosts, setProfilePosts)}
-        />
-      ) : (
-        <Asset
-          src={NoResults}
-          message={`No results found, ${profile?.owner} hasn't posted yet.`}
-        />
-      )}
+        </div>
+      </InfiniteScroll>
     </>
   );
+  
+  
 
   return (
     <Row className="justify-content-center">
