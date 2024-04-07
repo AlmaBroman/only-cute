@@ -16,3 +16,12 @@
   cursor: default;
   color: #cfced3;
 }
+
+.Link {
+  text-decoration: none;
+  color: #359d1b;
+}
+
+.Link:hover {
+  color: #1d570f;
+}

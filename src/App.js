@@ -45,17 +45,7 @@ function App() {
             exact
             path="/explore"
             render={() => (
-              <PostsPage message="No results found. Adjust the search keyword." />
-            )}
-          />
-          <Route
-            exact
-            path="/liked"
-            render={() => (
-              <PostsPage
-                message="No results found. Adjust the search keyword or like a post."
-                filter={`likes__owner__profile=${profile_id}&ordering=-likes__created_at&`}
-              />
+              <PostsPage message="No results found." />
             )}
           />
           <Route
@@ -64,7 +54,7 @@ function App() {
             render={() => (
               <PostsPage
                 message="No results found."
-                message2="Adjust the search keyword or like a post."
+                message2="Save a post and it will appear here!"
                 filter={`saved_posts__owner__profile=${profile_id}&ordering=-saved_posts__created_at&`}
               />
             )}
@@ -74,7 +64,7 @@ function App() {
             path="/search"
             render={() => (
               <PostsPage
-                message="No results found"
+                message="No results found."
                 message2="Try searching for something else!"
               />
             )}

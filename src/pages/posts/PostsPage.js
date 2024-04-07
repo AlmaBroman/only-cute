@@ -10,13 +10,15 @@ import Asset from "../../components/Asset";
 
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
 import NoResults from "../../assets/wow.png";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { Image } from "react-bootstrap";
+import welcomeImage from "../../assets/only-cute-hero.png";
 
 function PostsPage({ message, message2, filter = "", renderFallback }) {
   const [posts, setPosts] = useState({ results: [] });
@@ -49,9 +51,7 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
 
   if (pathname === "/") {
     pageTitle = "Home";
-    pageDescription = currentUser
-      ? "Welcome to your home feed! This is your place to view what the people you're following have been up to!"
-      : "Create an account or sign in to view your home feed";
+    pageDescription = "Welcome to your home feed! This is your place to view what the people you're following have been up to.";
   } else if (pathname === "/explore") {
     pageTitle = "Explore";
     pageDescription = "Discover new content and profiles!";
@@ -66,8 +66,9 @@ function PostsPage({ message, message2, filter = "", renderFallback }) {
         <>
           <Row className="justify-content-center text-center">
             <Col>
-              <h1>{pageTitle}</h1>
-              <p>{pageDescription}</p>
+            <h1>{pageTitle}</h1>
+              <Image src={welcomeImage} fluid />
+              <p className="mt-3"><Link className={styles.Link} to="/register">Create an account</Link> or <Link className={styles.Link} to="/signin">sign in</Link> to view your home feed.</p>
             </Col>
           </Row>
         </>
