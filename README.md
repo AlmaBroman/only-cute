@@ -20,7 +20,7 @@ The repository for the backend of the application can be found here: [https://gi
   * [Home Page](#home-page)
   * [Explore Page](#explore-page)
   * [Search Page](#search-page)
-  * [Saved Page](#liked-page)
+  * [Saved Page](#saved-page)
   * [Profile Page](#profile-page)
     * [Edit Profile](#edit-profile)
   * [Posts](#posts)
@@ -39,29 +39,23 @@ The repository for the backend of the application can be found here: [https://gi
       * [Form Validation](#form-validation)
   * [Additional Features](#additional-features)
 * [Colors](#colors)
+* [Fonts](#fonts)
 * [Testing](#testing)
   * [Manual Testing](#manual-testing)
   * [Validation](#validation)
-    * [ESLint](#eslint)
   * [Bugs](#bugs)
 * [Development process](#development-process)
   * [Development Preparation](#development-preparation)
   * [Agile Development](#agile-development)
-  * [Custom Fields](#custom-fields)
   * [Git](#git)
   * [React](#react)
-  * [Vite](#vite)
-  * [SCSS](#scss)
   * [Prettier](#prettier)  
-* [React Libraries](#react-libraries)
-  * [React Router](#react-router-v6)
-  * [Zustand](#zustand)
 * [Deployment](#deployment)
-  * [Deployment Preparation](#deployment-preparation)
   * [Setup](#setup)
 * [Credits](#credits)
   * [Used Technologies and Tools](#used-technologies-and-tools)
   * [Content and Media](#content-and-media)
+  * [Other](#other)
 * [Acknowledgments](#acknowledgments)
 
 # FEATURES
@@ -202,19 +196,31 @@ The repository for the backend of the application can be found here: [https://gi
 
 ## Additional Features
 Features that could be implemented in the future:
-- Allow users to reply directly to another comment. Replies would then be shown directly underneath that comment as a conversation.
-- Allow users to upvote/downvote comments and show the most popular comment on top instead of the most recent.
-- Allow users to return to a post in the list after opening it in detail. Currently, users are returned to the top of a list when returning from a post detail page.
+- Allow users to choose categories for their posts and filtering post by category on the search page
+- Allow users to view a link to a liked posts page on their profile page
+- Allow first time users to view a landing page with all the important information about the website so that they can learn about the features of the website
+- Allow users to create draft posts.
 
 # Colors
-As the primary color for my application, I chose a steel blue color: #2F5373. For the rest of the application, I used the default bootstrap colors.
+The page is centered around three main colors ( apart from black and white):
+
+- #ff66c4- pink
+- #ffde59 - yellow
+- #359d1b - green
+
+The color choices and the general design was centered around three words:
+- simple
+- fun
+- cute
+
+# Fonts
+The main font used for this website was Nunito and it was imported and implemented using [Google Fonts](https://fonts.google.com/).
 
 # Testing
 
 ## Manual Testing
 - Throughout the development process, I manually tested every page and feature exhaustively.   
 [List of manual tests](manual_testing.md)
-- When I finished creating my MVP, I shared the website with multiple users to confirm its functionality and to get feedback on their experience.
 
 ## Validation
 
@@ -222,46 +228,38 @@ As the primary color for my application, I chose a steel blue color: #2F5373. Fo
 
 There were no errors found in the javascript using [ESlint](https://eslint.org/).
 
-## Lighthouse Report
-![Lighthouse Report](docs/images/lighthouse-report.png)  
-The website was tested with Google Lighthouse. The performance is low because of the big javascript file. It could be improved by adding lazy loading to the pages loaded by the react router. On the initial page load, only the currently active components would be loaded
-
 ## Bugs
-There are no known unfixed bugs.
 
 ### Fixed Bugs
-- After posting a comment, other comments started to appear twice in the list of comments. This was caused by the pagination of the comment list. After posting a comment, all the other comments were shifted by one in the pagination i.e. the last comment on the first page of the list was moved to the first place on the second page.  
-In practice: After posting, when the next page of comments was loaded by the infinite scroll, the last comment of the previous page was loaded again as the first comment on the next.
-    - Fixed by filtering out existing comments from the list loaded by the infinite scroll before adding them to the display
+| Bug | Description     | Solution             |
+| :-----: | :-----------: |:---------------------------------:|
+| **Image deafult overriding user uploaded image on put request**  | When making a put request for updating the post or profile data with existing values for image, the updated data would 'forget' the existing image and instead put the default image.  | This turned out to be an issue with the djangorestframework 3.15, solved by upgrading to djangorestframework 3.15.1 |
+
+### Unsolved Bugs
+The developer has fixed all the bugs that has been found so far.
 
 # Development process
-While I was working on this project, I tried to follow an agile development approach as much as possible. 
+While working on this project, I tried to follow an agile development approach as much as possible. 
 
 ## Development Preparation
 The first step in my development process was to plan the website thoroughly:
 - At first, I created a simple class diagram that shows the models I was planning on implementing, with their properties and relations  
-  [Link to the class diagram](https://drive.google.com/file/d/1mJWKN7ZxXBxVgPcC8Y_ZCXYZGNR4A8dm/view?usp=sharing)
-- Next, I thought about the User Interface and its layout. I created simple [wireframes](docs/images/wireframes.png) for the homepage and the article detail page. 
-  - Note: During development, I changed the layout of the post detail page and comments because there would not be enough space and it reduced development time by reusing existing components  
-- Lastly, I wrote the majority of my user stories and tasks in my [GitHub Project](https://github.com/users/Cushione/projects/4) 
+  [Image of the class diagram](docs/images/db-models.png)
+- Next, I thought about the User Interface and its layout. I created a wireframe[(image of the wireframe)](docs/images/only-cute-wireframes.png). 
+  - Note: During development, the layout for some of the pages were modified. Landing page for example was planned but not implemented in this sprint.
+- Lastly, I wrote the majority of my user stories and tasks in my [GitHub Project](https://github.com/users/AlmaBroman/projects/6/views/1?visibleFields=%5B%22Title%22%2C84473290%2C84475478%5D) 
 
 ### Agile Development
-- In my [GitHub Project](https://github.com/users/Cushione/projects/4), all my issues are separated into two parts of the application by a custom field "App". Each ticket was assigned one of two milestones: "MVP" and "Additional Features"
+- In my [GitHub Project](https://github.com/users/AlmaBroman/projects/6/views/12), all my issues are separated into two parts of the application by a custom field "App". Each ticket was assigned one of two milestones: "MVP" and "Additional Features"
 - Issues not necessary for my project were added to the "Additional Features" milestone. Those tickets were only to be worked on when all the "MVP" tickets were done and I still had time left.
 - Each issue was then categorized into user stories or technical tasks by adding the corresponding label.
 - All the issues were then grouped into various epics by a custom field "Epic".
-- Every issue was created in added "Unspecified" column. After specification, it was moved to "Todo".
 - When I was working on the project, I chose one issue to work on from the "Todo" column of the MVP board and moved it into the "In Progress" column.
-- After I finished the issue by fulfilling all the acceptance criteria, I closed the issue which moved it automatically into the "Done" Column.
+- After I finished the issue by fulfilling all the acceptance criteria, I moved it into the "Done" Column.
 
-#### Custom fields
-![Custom Fields](docs/images/custom-field.png)  
-Custom fields were created in the [settings of the GitHub Project](https://github.com/users/Cushione/projects/4/settings)
-
-
-## Git
-- I started the program and repository by creating a new repository on GitHub.
-- Then I regularly staged my changes using the command `git add <filename>` and then committed the staged changes to my local repository using `git commit -m 'short descriptive message here'`.
+### Git
+- I started the program and repository by using the [gitpod python template](https://github.com/Code-Institute-Org/python-essentials-template) provided by the Code Insitute.
+- Then I regularly staged my changes using the command `git add .` and then committed the staged changes to my local repository using `git commit -m 'short descriptive message here'`.
 - Finally, I would push the commits from my local repository up to the GitHub repository using the command `git push`.
 - With every push, Heroku automatically deploys my latest commit from the 'main' branch to the Heroku app.
 
@@ -269,91 +267,14 @@ Custom fields were created in the [settings of the GitHub Project](https://githu
 The react project was initialised with [create-react-app](https://www.npmjs.com/package/create-react-app) build tool and the [template](https://github.com/Code-Institute-Org/cra-template-moments.git) provided by Code Institute:   
 ```npx create-react-app . --template git+https://github.com/Code-Institute-Org/cra-template-moments.git --use-npm```
 
-## Vite
-After initialising the project with [create-react-app](https://www.npmjs.com/package/create-react-app), I migrated to [Vite](https://vitejs.dev/) through the following steps:
-- First, I added the following dependencies to my project with the command ```npm install [page_name]```:
-    - [vite](https://www.npmjs.com/package/vite)
-    - [sass](https://www.npmjs.com/package/sass)
-    - [@vitejs/plugin-react](https://www.npmjs.com/package/@vitejs/plugin-react) 
-    - [@types/react-dom](https://www.npmjs.com/package/@types/react-dom)
-- I replaced the react-scripts npm scripts in the _package.json_ with the vite commands and removed react-scripts from the dependencies
-- I added the following _vite.config.js_ to the root of my application:
-```js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    outDir: 'build'
-  }
-})
-```
-- I removed all the _%PUBLIC_URL%_ from the index.html and moved the file to the root of my application
-- The last step was to change the file endings of all the Javascript (.js) and stylesheet (.css) files in the src folder to .tsx and .scss respectively (apart from reportWebVitals.js and setupTests.js)
-
-## SCSS
-- The styles in the project are written in SCSS stylesheets.
-- The SCSS files are automatically compiled to CSS by the [Vite](https://vitejs.dev/) build tool with the [sass compiler](https://www.npmjs.com/package/sass) 
-
 ## Prettier
 The Typescript and SCSS files were formatted during the development with the [Prettier](https://prettier.io/) library. The following steps were taken to set up Prettier in the project:
 - First, I install the [Prettier package](https://www.npmjs.com/package/prettier) in my project with the command ```npm install prettier```
-- Then I added a prettier config file _.prettierrc.json_ to the root of the project and added the following configuration:
-```json
-{
-  "semi": false,          # No semicolons
-  "singleQuote": true,    # Use single quotes
-  "printWidth": 80,       # Max line length
-  "jsxSingleQuote": true  # Use single quotes in jsx code
-}
-```
-- The last step was to add a _.prettierignore_ file and list all the files that should not be formatted by Prettier:
-```
-build
-coverage
-public
-package.json
-package-lock.json
-.vscode
-.prettierrc.json
-README.md
-```
-
-# React Libraries
-
-## React Router V6
-The application uses the [React Router](https://reactrouter.com/en/main) library for the routing within the application and also data fetching through loaders and form submission with actions. The React Router is the go-to solution for routing in React applications. The latest version also handles data loading and writing which makes it easy to keep the UI in sync with the data.
-
-## Zustand
-Instead of the built-in Context feature, the application uses the [Zustand](https://github.com/pmndrs/zustand) library for data that needs to be accessible in the whole application. Information about the user and access to messages is needed inside and outside of components like data loaders and actions. The Context feature only provides access through hooks that are only available in components whereas Zustand has a built-in way to access the state from outside components.
+- when a file is done I use the command 'control' + 'shift' + 'f' to format the file with the prettier formatter in my workspace.
 
 # Deployment
 
-The app was deployed using Heroku and the [NGINX Heroku Buildpack](https://github.com/heroku/heroku-buildpack-nginx). NGINX was used to allow users to access the application through deep links e.g. [photora.herokuapp.com/posts/11](https://photora.herokuapp.com/posts/11). The [serve](https://www.npmjs.com/package/serve) library by Vercel that is suggested by Code Institute only allowed the user to open the landing page of the application and showed a 404 error page for deep links.
-
-## Deployment Preparation
-Before the deployment, the following steps were taken to prepare the application for the deployment on Heroku with NGINX:
-- I created a file "nginx.conf.erb" in the folder "config" in the root of the application. As the starting point for the config, I used the [sample config](https://github.com/heroku/heroku-buildpack-nginx/blob/main/config/nginx-solo-sample.conf.erb) provided by the [NGINX Heroku Buildpack](https://github.com/heroku/heroku-buildpack-nginx).
-    - I replaced line 37 of the sample config _root /app/public; # path to your app_ with the following:
-    ```erb
-    	# Path to the root of the application i.e. the output folder of the build
-        root build;
-		# File name of the index file 
-        index index.html;
-
-		# Location block that will be used to process incoming requests
-        location / {
-			# For every request try the following
-			# - Check if a file can be found with the URI, if so serve that file
-			# - Check if a file can be found with the URI and trailing slash, if so serve that file
-			# - Check if a file can be found with the URI with added .html, if so serve that file
-			# - If no files can be found, serve the index.html
-			# - If no index.html can be found, show 404 error
-            try_files $uri $uri/ $uri.html /index.html =404;
-        }
-    ```
-- The nginx start command `web: bin/start-nginx-solo` was stored in a Procfile.
+The app was deployed using Heroku.
 
 ## Setup
 The steps to deploy the React app to Heroku are as follows:
@@ -361,7 +282,6 @@ The steps to deploy the React app to Heroku are as follows:
 - Enter a name for the app and select a region, then click on "Create App".
 - On the page of the app that opens, go to the "Settings" tab.
 - In Settings add the necessary config vars, for this project I added the URL of my backend.
-- Next, add the buildpacks "heroku/nodejs" and "https://github.com/heroku/heroku-buildpack-nginx.git".
 - Afterwards, go to the "Deploy" tab on the app page.
 - In the "Deployment method" section, select "GitHub" and follow the steps to connect Heroku with GitHub.
 - Then, in the "Connect to GitHub" section, search for the repository that is supposed to be deployed and click on "Connect".
@@ -369,28 +289,33 @@ The steps to deploy the React app to Heroku are as follows:
     - enable automatic deployment by clicking on the button "Enable Automatic Deploys" in the "Automatic Deploys" Section.
     - deploy a branch manually by selecting the branch and clicking the button "Deploy Branch" in the "Manual deploys" section.
 
-The live link can be found here: [Photora](https://photora.herokuapp.com/)
+The live link can be found here: [Only Cute](https://only-cute-95810adc5d9f.herokuapp.com/)
 
 # Credits
 
 ## Used Technologies and Tools
-- [Vite](https://vitejs.dev/) - As the build tool
-- [Bootstrap](https://getbootstrap.com/) - As the CSS framework
-- [Black](https://black.vercel.app/) - For formatting Python code
+- [React Bootstrap 4](https://react-bootstrap-v4.netlify.app/getting-started/introduction/) - As the CSS framework
 - [Prettier](https://prettier.io/) - For formatting Javascript code
 - [Heroku](https://www.heroku.com/) - For the deployment of the website
 - [ElephantSQL](https://www.elephantsql.com/) - As the database provider
 - [Cloudinary](https://cloudinary.com/) - As the image storage
+- [Balsamiq](https://balsamiq.com/) - For creating the wireframes
+- [Lucid Chart](https://lucid.app/) - For creating the database diagrams
+- [Canva](https://www.canva.com/) - For creating custom logos and hero image
+- [Tiny Img](https://tiny-img.com/image-compressor/) - Image resizer
 
 ## Content and Media
-- All the images posted on the website by me were downloaded from [Unsplash](https://unsplash.com/)
+- All the images posted on the website by me were downloaded from [Unsplash](https://unsplash.com/) and [Pexels](https://www.pexels.com/)
 - All the icons on the website are from [FontAwesome](https://fontawesome.com/)
-- The fonts [Comfortaa](https://fonts.google.com/specimen/Comfortaa) and [Raleway](https://fonts.google.com/specimen/Raleway) are from [Google Fonts](https://fonts.google.com/)
+- The fonts [Nunito](https://fonts.google.com/specimen/Nunito?query=nunito)
+
+## Other
+- This project was based on the drf and the moments walktrough from Code Institute. I have used the walktrough projects as a starting off point and then modified them accordingly to suit my project.
 
 
 # Acknowledgements
 
 I would like to acknowledge the following people who have helped me along the way in completing my final portfolio project:
-- My husband, Moritz Wach, for all his knowledge and relentless support.
-- My mentor, Spencer Barriball, for his guidance and inspiration.
-- My friends and colleagues for testing the website rigorously and sharing posts and writing comments.
+- Akshat Garg, for mentoring me and for his guidance and inspiration.
+- CI tutor support and my fellow students, without slack and tutor support i wouldn't have been able to come as far as i've done.
+- My friends and family for testing the website and sharing posts and writing comments.
