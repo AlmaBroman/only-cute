@@ -1,102 +1,396 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Only Cute
+![Only Cute Logo](docs/images/only-cute-hero.png)  
+Only Cute is a photo sharing platform for authenticated users to share cute images with other people. Logged in users can post, like, save and comment on post and edit/delete posts they've created. Logged in users are also able to follow other users in doing their home feed will be populated by the posts from the poeple the logged in user has followed.
 
-Welcome,
+# Live Page
+[https://only-cute-95810adc5d9f.herokuapp.com/](https://only-cute-95810adc5d9f.herokuapp.com/)
 
-This is the Code Institute student template for React apps on the Codeanywhere IDE. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.  
-DO NOT use this template if you are using the Gitpod IDE. Use the following command instead:  
-`npx create-react-app . --template git+https://github.com/Code-Institute-Org/cra-template-moments.git --use-npm`
+![Website Mockup](docs/images/responsive.png)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **31st August, 2023**
+# Objective
+The objective of this project is to present my skills in React, Django Rest Framework and Python. I wanted to create a simple app with easy-to-use handy functions for the user to easily navigate through the site.
 
-## Codeanywhere Reminders
+# Django Rest Backend
+The repository for the backend of the application can be found here: [https://github.com/AlmaBroman/only-cute-api](https://github.com/AlmaBroman/only-cute-api)
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+# Contents
+* [Features](#features)
+  * [Navbar](#navbar)
+  * [Post](#post)
+  * [Home Page](#home-page)
+  * [Explore Page](#explore-page)
+  * [Search Page](#search-page)
+  * [Saved Page](#liked-page)
+  * [Profile Page](#profile-page)
+    * [Edit Profile](#edit-profile)
+  * [Posts](#posts)
+    * [Post Detail](#post-detail)
+    * [Create Post](#create-post)
+    * [Edit Post](#edit-post)
+    * [Like Post](#like-post)
+    * [Save Post](#save-post)
+    * [Delete Post](#delete-post)
+  * [Comments](#comments)
+    * [Add Comment](#add-comment)
+    * [Edit Comment](#edit-comment)
+    * [Delete Comment](#delete-comment)
+  * [Register](#register)
+  * [Sign In](#sign-in)
+      * [Form Validation](#form-validation)
+  * [Additional Features](#additional-features)
+* [Colors](#colors)
+* [Testing](#testing)
+  * [Manual Testing](#manual-testing)
+  * [Validation](#validation)
+    * [ESLint](#eslint)
+  * [Bugs](#bugs)
+* [Development process](#development-process)
+  * [Development Preparation](#development-preparation)
+  * [Agile Development](#agile-development)
+  * [Custom Fields](#custom-fields)
+  * [Git](#git)
+  * [React](#react)
+  * [Vite](#vite)
+  * [SCSS](#scss)
+  * [Prettier](#prettier)  
+* [React Libraries](#react-libraries)
+  * [React Router](#react-router-v6)
+  * [Zustand](#zustand)
+* [Deployment](#deployment)
+  * [Deployment Preparation](#deployment-preparation)
+  * [Setup](#setup)
+* [Credits](#credits)
+  * [Used Technologies and Tools](#used-technologies-and-tools)
+  * [Content and Media](#content-and-media)
+* [Acknowledgments](#acknowledgments)
 
-To log into the Heroku toolbelt CLI:
+# FEATURES
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+## Navbar
+![Navbar](docs/features/navbar.png)
+- The navbar is visible on every page.
+- It is fully responsive and includes the site logo at the top and links to all the pages below.
+- The navbar is responsive, appearing as a dropdown menu at the top of the screen on smaller devices
+- The navbar when logged in shows create, saved, user profile and logout links.
+- The user can always see if they are logged in by their username and profile image being displayed. 
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+## Post
+![Post](docs/features/post-1.png)
+- The Post component is reused throughout the application to display posts.
+- At the top of the card, a link to the author's profile and the time since posting is displayed.
+- The middle of the card shows the image of the post.
+- Below the image shows the post title and post description. All users can see like, save and comment buttons.
+![Post Profile Page](docs/features/post-2.png)
+- On profile pages on larger screens the post component is styled differently, divided into two columns so that users can get a better overview of all the posts and easily browse through a users posts.
 
----
+## Home Page
+![Home Page Unauthenticated](docs/features/home-page-unauth.png)
+- The Home Page is used to display a welcoming message to new users who are not yet members.
 
-Happy coding!
+![Home Page No Follow](docs/features/home-page-no-follow.png)
+- Members, who have not yet followed anybody, can see a welcome message and a hint to follow somebody other members.
+- Under the message they can view a list of popular profiles to follow.
 
-# Getting Started with Create React App
+![Home Page Feed](docs/features/home-feed.png)
+- The posts in the feed are displayed with the Post List component that uses the Post component for every post. The post list component is reused on multiple pages to display a list of posts.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Explore Page
+![Explore Page](docs/features/explore.png)
+- The explore page allows any user to explore new content.
+- This page shows all the posts loading in ten posts at a time with infinite scroll.
 
-## Available Scripts
+## Search Page
+![Search Page](docs/features/search.png)
+- The user can search for specific posts containing chosen keywords.
+- To get a match, the article has to contain selected keywords in either the post title or name of the author.
+- The search request is automatically sent after typing and displayed below the search bar. 
+- In case there is no match, the page informs the user of the fact by displaying a message.
+- The search page uses one of the pages that use the Post List component to display the result.
 
-In the project directory, you can run:
+## Saved Page
+![Saved Page](docs/features/saved.png)
+- The saved page allows members to see posts they saved.
+![Empty Saved Page](docs/features/no-saved.png)
+- If they haven't saved any posts the post page will have no posts and will show a hint to the user to save a post.
 
-### `npm install`
+## Profile Page
+![Profile Page](docs/features/profile.png)
+- Every member has a profile page that displays the profile image, name, and biography of the member.
+- Members can see a Follow button at the top right corner of other member's profiles that allows them to follow that member to receive that member's posts in their feed.
+- Below the profile information, all the posts of the member are displayed in a grid.
 
-Installs the required npm packages.
+### Edit Profile
+![Edit Profile](docs/features/edit-profile.png)
+- Members can edit their own profile through the Edit Profile page which is accessible by clicking the edit button in the top right corner of their profile.
+- The edit post form allows the user to change their profile image, name, and biography.
 
-### `npm start`
+## Posts
 
-Runs the app in the development mode.\
-Open port 3000 to view it in the browser.
+### Post Detail
+![Post Detail](docs/features/post-detail.png)
+- Every post on the website can be opened by clicking on the image in the post.
+- At the top, the detail page shows the title of the post. Below the title, the post is displayed with the [Post component](#post) which is also used in the Post List component.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Create Post
+![Create Post](docs/features/create-post.png)
+- Posts can be created by members through the Create Post page.
+- The page shows the Post Form component which has an image input and two text inputs for the title and content. The image input is the same component as on the Edit Profile page.
+- When submitting the form, the post is created and the user is navigated to the ppost detail page of their newly created post.
 
-### `npm test`
+### Edit Post
+![Edit Post](docs/features/edit-post.png)
+- Post can be edited by the owner of the post through the Edit Post page accessible through the Post Detail page of the post.
+- Like the Create Post page, the page also uses the Post Form component but is prefilled with the post data.
+- When submitting the form, the post is updated and the user is navigated to the post detail page of the edited post.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Like Post
+- Posts can be liked by authenticated members by clicking the heart button on the post card.
+- The heart in the button gets filled to inform the user about the successful like.
+- Members can revert the like by clicking the button again, which empties the heart.
 
-### `npm run build`
+### Save Post
+- Posts can be saved by authenticated users by clicking on the star button on the post card.
+- The star gets filled to inform the user about the successful save.
+- The users saved posts are listed on the saved post page.
+- Members can revert the save by clicking on the button again, removing it from the save post page and making the star unfilled and grey.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Delete Post
+- Posts can be deleted permanently by the owner of the post through the Post Detail page.
+- In the Post Card component the owner can see a delete button by clicking on the three dots dropdown menu next to the date.
+- When clicking on the trash can, the post is deleted and the user is navigated to the profile page. A message informs the user about the successful operation.
+- When canceling the deletion, the modal is closed.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Comments
+![Comment Section](docs/features/comments.png)
+- Every post has a comment section on the detail page.
+- If the user is not authenticated, a hint shows that the user needs to log in or register to post a comment.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Add Comment
+- If the user is authenticated, a comment form is displayed instead of the hint.
+- The user can enter the content of the comment and post it by clicking the button.
 
-### `npm run eject`
+### Edit Comment
+- The user can edit their comment by clicking the edit button in the top right corner.
+- The comment turns into an inline form allowing the user to edit the comment.
+- To save the changes, the user can click on the save button.
+- If the user changes their mind, and does not want to edit the comment any longer, they can drop the changes by clicking the cancel button.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Delete Comment
+- The user can remove their comments permanently from the conversation.
+- To delete a comment, the user can click on the three dots in the top right corner of the comment and then the trashcan button.
+- The comment is immediatly deleted and will dissapear from the posts comment list.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Register
+![Register Form](docs/features/register.png)
+- If a user wants to use the features reserved for members of the website, such as commenting, liking, saving (...etc) they have to register.
+- The user can reach the registration page by the link in the navbar or through links available throughout the website.
+- To become a member, the user has to enter a username, a password and then confirm the password.
+- If the provided data is valid, the user is automatically logged in and redirected to the Homepage.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Sign In
+![Sign in Form](docs/features/sign-in.png)
+- If an unauthenticated member wants to use the features reserved for members of the website such as commenting and liking, they have to log in.
+- The member can reach the login page by the link in the navigation bar or through links available throughout the website.
+- To log in, the user has to enter their username and password.
+- If the username and/or password are incorrect, the form is loaded again, informing the user about the error.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Form Validation
+![Sign In Form Error](docs/features/sign-in-validation.png)
+- If the entered data is invalid when sent off, the form data is preserved and an error is displayed. 
+- After fixing the invalid fields the user can send the form again.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Additional Features
+Features that could be implemented in the future:
+- Allow users to reply directly to another comment. Replies would then be shown directly underneath that comment as a conversation.
+- Allow users to upvote/downvote comments and show the most popular comment on top instead of the most recent.
+- Allow users to return to a post in the list after opening it in detail. Currently, users are returned to the top of a list when returning from a post detail page.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Colors
+As the primary color for my application, I chose a steel blue color: #2F5373. For the rest of the application, I used the default bootstrap colors.
 
-### Code Splitting
+# Testing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Manual Testing
+- Throughout the development process, I manually tested every page and feature exhaustively.   
+[List of manual tests](manual_testing.md)
+- When I finished creating my MVP, I shared the website with multiple users to confirm its functionality and to get feedback on their experience.
 
-### Analyzing the Bundle Size
+## Validation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### ESlint
 
-### Making a Progressive Web App
+There were no errors found in the javascript using [ESlint](https://eslint.org/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Lighthouse Report
+![Lighthouse Report](docs/images/lighthouse-report.png)  
+The website was tested with Google Lighthouse. The performance is low because of the big javascript file. It could be improved by adding lazy loading to the pages loaded by the react router. On the initial page load, only the currently active components would be loaded
 
-### Advanced Configuration
+## Bugs
+There are no known unfixed bugs.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Fixed Bugs
+- After posting a comment, other comments started to appear twice in the list of comments. This was caused by the pagination of the comment list. After posting a comment, all the other comments were shifted by one in the pagination i.e. the last comment on the first page of the list was moved to the first place on the second page.  
+In practice: After posting, when the next page of comments was loaded by the infinite scroll, the last comment of the previous page was loaded again as the first comment on the next.
+    - Fixed by filtering out existing comments from the list loaded by the infinite scroll before adding them to the display
 
-### Deployment
+# Development process
+While I was working on this project, I tried to follow an agile development approach as much as possible. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Development Preparation
+The first step in my development process was to plan the website thoroughly:
+- At first, I created a simple class diagram that shows the models I was planning on implementing, with their properties and relations  
+  [Link to the class diagram](https://drive.google.com/file/d/1mJWKN7ZxXBxVgPcC8Y_ZCXYZGNR4A8dm/view?usp=sharing)
+- Next, I thought about the User Interface and its layout. I created simple [wireframes](docs/images/wireframes.png) for the homepage and the article detail page. 
+  - Note: During development, I changed the layout of the post detail page and comments because there would not be enough space and it reduced development time by reusing existing components  
+- Lastly, I wrote the majority of my user stories and tasks in my [GitHub Project](https://github.com/users/Cushione/projects/4) 
 
-### `npm run build` fails to minify
+### Agile Development
+- In my [GitHub Project](https://github.com/users/Cushione/projects/4), all my issues are separated into two parts of the application by a custom field "App". Each ticket was assigned one of two milestones: "MVP" and "Additional Features"
+- Issues not necessary for my project were added to the "Additional Features" milestone. Those tickets were only to be worked on when all the "MVP" tickets were done and I still had time left.
+- Each issue was then categorized into user stories or technical tasks by adding the corresponding label.
+- All the issues were then grouped into various epics by a custom field "Epic".
+- Every issue was created in added "Unspecified" column. After specification, it was moved to "Todo".
+- When I was working on the project, I chose one issue to work on from the "Todo" column of the MVP board and moved it into the "In Progress" column.
+- After I finished the issue by fulfilling all the acceptance criteria, I closed the issue which moved it automatically into the "Done" Column.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Custom fields
+![Custom Fields](docs/images/custom-field.png)  
+Custom fields were created in the [settings of the GitHub Project](https://github.com/users/Cushione/projects/4/settings)
+
+
+## Git
+- I started the program and repository by creating a new repository on GitHub.
+- Then I regularly staged my changes using the command `git add <filename>` and then committed the staged changes to my local repository using `git commit -m 'short descriptive message here'`.
+- Finally, I would push the commits from my local repository up to the GitHub repository using the command `git push`.
+- With every push, Heroku automatically deploys my latest commit from the 'main' branch to the Heroku app.
+
+## React
+The react project was initialised with [create-react-app](https://www.npmjs.com/package/create-react-app) build tool and the [template](https://github.com/Code-Institute-Org/cra-template-moments.git) provided by Code Institute:   
+```npx create-react-app . --template git+https://github.com/Code-Institute-Org/cra-template-moments.git --use-npm```
+
+## Vite
+After initialising the project with [create-react-app](https://www.npmjs.com/package/create-react-app), I migrated to [Vite](https://vitejs.dev/) through the following steps:
+- First, I added the following dependencies to my project with the command ```npm install [page_name]```:
+    - [vite](https://www.npmjs.com/package/vite)
+    - [sass](https://www.npmjs.com/package/sass)
+    - [@vitejs/plugin-react](https://www.npmjs.com/package/@vitejs/plugin-react) 
+    - [@types/react-dom](https://www.npmjs.com/package/@types/react-dom)
+- I replaced the react-scripts npm scripts in the _package.json_ with the vite commands and removed react-scripts from the dependencies
+- I added the following _vite.config.js_ to the root of my application:
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    outDir: 'build'
+  }
+})
+```
+- I removed all the _%PUBLIC_URL%_ from the index.html and moved the file to the root of my application
+- The last step was to change the file endings of all the Javascript (.js) and stylesheet (.css) files in the src folder to .tsx and .scss respectively (apart from reportWebVitals.js and setupTests.js)
+
+## SCSS
+- The styles in the project are written in SCSS stylesheets.
+- The SCSS files are automatically compiled to CSS by the [Vite](https://vitejs.dev/) build tool with the [sass compiler](https://www.npmjs.com/package/sass) 
+
+## Prettier
+The Typescript and SCSS files were formatted during the development with the [Prettier](https://prettier.io/) library. The following steps were taken to set up Prettier in the project:
+- First, I install the [Prettier package](https://www.npmjs.com/package/prettier) in my project with the command ```npm install prettier```
+- Then I added a prettier config file _.prettierrc.json_ to the root of the project and added the following configuration:
+```json
+{
+  "semi": false,          # No semicolons
+  "singleQuote": true,    # Use single quotes
+  "printWidth": 80,       # Max line length
+  "jsxSingleQuote": true  # Use single quotes in jsx code
+}
+```
+- The last step was to add a _.prettierignore_ file and list all the files that should not be formatted by Prettier:
+```
+build
+coverage
+public
+package.json
+package-lock.json
+.vscode
+.prettierrc.json
+README.md
+```
+
+# React Libraries
+
+## React Router V6
+The application uses the [React Router](https://reactrouter.com/en/main) library for the routing within the application and also data fetching through loaders and form submission with actions. The React Router is the go-to solution for routing in React applications. The latest version also handles data loading and writing which makes it easy to keep the UI in sync with the data.
+
+## Zustand
+Instead of the built-in Context feature, the application uses the [Zustand](https://github.com/pmndrs/zustand) library for data that needs to be accessible in the whole application. Information about the user and access to messages is needed inside and outside of components like data loaders and actions. The Context feature only provides access through hooks that are only available in components whereas Zustand has a built-in way to access the state from outside components.
+
+# Deployment
+
+The app was deployed using Heroku and the [NGINX Heroku Buildpack](https://github.com/heroku/heroku-buildpack-nginx). NGINX was used to allow users to access the application through deep links e.g. [photora.herokuapp.com/posts/11](https://photora.herokuapp.com/posts/11). The [serve](https://www.npmjs.com/package/serve) library by Vercel that is suggested by Code Institute only allowed the user to open the landing page of the application and showed a 404 error page for deep links.
+
+## Deployment Preparation
+Before the deployment, the following steps were taken to prepare the application for the deployment on Heroku with NGINX:
+- I created a file "nginx.conf.erb" in the folder "config" in the root of the application. As the starting point for the config, I used the [sample config](https://github.com/heroku/heroku-buildpack-nginx/blob/main/config/nginx-solo-sample.conf.erb) provided by the [NGINX Heroku Buildpack](https://github.com/heroku/heroku-buildpack-nginx).
+    - I replaced line 37 of the sample config _root /app/public; # path to your app_ with the following:
+    ```erb
+    	# Path to the root of the application i.e. the output folder of the build
+        root build;
+		# File name of the index file 
+        index index.html;
+
+		# Location block that will be used to process incoming requests
+        location / {
+			# For every request try the following
+			# - Check if a file can be found with the URI, if so serve that file
+			# - Check if a file can be found with the URI and trailing slash, if so serve that file
+			# - Check if a file can be found with the URI with added .html, if so serve that file
+			# - If no files can be found, serve the index.html
+			# - If no index.html can be found, show 404 error
+            try_files $uri $uri/ $uri.html /index.html =404;
+        }
+    ```
+- The nginx start command `web: bin/start-nginx-solo` was stored in a Procfile.
+
+## Setup
+The steps to deploy the React app to Heroku are as follows:
+- Create a new App from the Heroku dashboard.
+- Enter a name for the app and select a region, then click on "Create App".
+- On the page of the app that opens, go to the "Settings" tab.
+- In Settings add the necessary config vars, for this project I added the URL of my backend.
+- Next, add the buildpacks "heroku/nodejs" and "https://github.com/heroku/heroku-buildpack-nginx.git".
+- Afterwards, go to the "Deploy" tab on the app page.
+- In the "Deployment method" section, select "GitHub" and follow the steps to connect Heroku with GitHub.
+- Then, in the "Connect to GitHub" section, search for the repository that is supposed to be deployed and click on "Connect".
+- The last step is to either:
+    - enable automatic deployment by clicking on the button "Enable Automatic Deploys" in the "Automatic Deploys" Section.
+    - deploy a branch manually by selecting the branch and clicking the button "Deploy Branch" in the "Manual deploys" section.
+
+The live link can be found here: [Photora](https://photora.herokuapp.com/)
+
+# Credits
+
+## Used Technologies and Tools
+- [Vite](https://vitejs.dev/) - As the build tool
+- [Bootstrap](https://getbootstrap.com/) - As the CSS framework
+- [Black](https://black.vercel.app/) - For formatting Python code
+- [Prettier](https://prettier.io/) - For formatting Javascript code
+- [Heroku](https://www.heroku.com/) - For the deployment of the website
+- [ElephantSQL](https://www.elephantsql.com/) - As the database provider
+- [Cloudinary](https://cloudinary.com/) - As the image storage
+
+## Content and Media
+- All the images posted on the website by me were downloaded from [Unsplash](https://unsplash.com/)
+- All the icons on the website are from [FontAwesome](https://fontawesome.com/)
+- The fonts [Comfortaa](https://fonts.google.com/specimen/Comfortaa) and [Raleway](https://fonts.google.com/specimen/Raleway) are from [Google Fonts](https://fonts.google.com/)
+
+
+# Acknowledgements
+
+I would like to acknowledge the following people who have helped me along the way in completing my final portfolio project:
+- My husband, Moritz Wach, for all his knowledge and relentless support.
+- My mentor, Spencer Barriball, for his guidance and inspiration.
+- My friends and colleagues for testing the website rigorously and sharing posts and writing comments.
